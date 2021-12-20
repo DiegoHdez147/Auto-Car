@@ -1,0 +1,246 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+action code{:
+    FrmPrincipal v=new FrmPrincipal();    
+:}
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal PRINCIPAL, Identificador, Numero, ERROR, FINLI, INICIO, FIN, PARAR, IZQUIERDA, DERECHA, GIRAR, CICLO, 
+BANDERA, VERDADERO, FALSO, CONDICION, AVANZAR, RETROCEDER,ENTERO,DIGITAL,ANALOGO,LUZ,SENSOR,ENTRADA,SALIDA,
+PROXIMIDAD,ESTADO,DELANTERA,TRASERA,CABINA,RUEDAS,BAJAR,SUBIR,CERRAR,ABRIR,GANCHO,BOCINA,ROMPER,
+REPETIR,OPCION,EVALUAR,NORTE,SUR,ESTE,OESTE,NORESTE,NOROESTE,SURESTE,SUROESTE,
+NINGUNO,IGUALQUE,DIFERENTEDE,MAYORIGUAL,MENORIGUAL,MENOR,MAYOR,OR,AND,NOT,CORCHI,
+PARENTESISI,FUNCION,CORCHD,PARENTESISD,Asignacion,Suma,Resta,Multiplicacion, 
+Division, ERROR1, ERROR2, ERRORP, UNO, CERO, NumeroEnt, COMILLA;
+
+non terminal START, INSTRUCCIONES, INSTRUCCION, EVALUARE, OPCIONES, OPCIONN, 
+NINGUNON, CONDICIONES, CONDICIONN, CondicionA ,RELACIONALES, AVANZARE, 
+DECLARARTIPO,BANDERAE, CICLOS, REPETIRE, TIPOS, FUNCIONE, 
+direccion, posicion, ENCENDER,APAGAR, OBTENERLUZ,USARSENSOR,DETENERMOVRUEDAS,
+GIRARCARRO,MANEJOGANCHO,MOVCARRO,CONTROLCABINA,FUNCIONBOCINA, CARDINAL, Operaciones,
+OperadoresLo,OperadoresA;
+
+start with START;
+
+START ::= 
+    PRINCIPAL INICIO INSTRUCCIONES FIN | 
+    PRINCIPAL INICIO FIN |
+    PRINCIPAL INICIO :s {:v.genErrores.add((sright+1) + " No agregaste el FIN");:}|
+    PRINCIPAL INICIO INSTRUCCIONES :s {:v.genErrores.add((sright+1) + " No agregaste el FIN");:}
+;
+
+INSTRUCCIONES ::=
+    INSTRUCCION|INSTRUCCION INSTRUCCIONES 
+;
+
+INSTRUCCION ::=
+    EVALUARE | AVANZARE | CONDICIONES | DECLARARTIPO | BANDERAE | CICLOS |
+    REPETIRE | FUNCIONE | ENCENDER | APAGAR | OBTENERLUZ | USARSENSOR |
+    DETENERMOVRUEDAS | GIRARCARRO | MANEJOGANCHO | 
+    MOVCARRO | CONTROLCABINA | FUNCIONBOCINA | Operaciones
+;
+
+DECLARARTIPO ::=
+    ENTERO Identificador FINLI |
+    ANALOGO Identificador FINLI | 
+    DIGITAL Identificador FINLI |
+
+    ENTERO Identificador Asignacion NumeroEnt FINLI |
+    ANALOGO Identificador Asignacion Numero FINLI |
+
+    ENTERO Identificador Asignacion UNO FINLI |
+    ANALOGO Identificador Asignacion CERO FINLI |
+    ENTERO Identificador Asignacion CERO FINLI |
+    ANALOGO Identificador Asignacion UNO FINLI |
+
+    DIGITAL Identificador Asignacion UNO FINLI |
+    DIGITAL Identificador Asignacion CERO FINLI |
+    
+    DIGITAL Identificador Asignacion Numero FINLI :s {:v.genErrores.add((sright+1) + " Estas intentando agregar un valor diferente a 1 y 0");:} |
+    DIGITAL Identificador Asignacion NumeroEnt FINLI :s {:v.genErrores.add((sright+1) + " Estas intentando agregar un valor diferente a 1 y 0");:}
+;
+
+EVALUARE ::=
+	EVALUAR CORCHI Identificador CORCHD INICIO OPCIONES FIN|
+	EVALUAR CORCHI Identificador CORCHD INICIO OPCIONES NINGUNON FIN
+;
+
+CONDICIONES ::=
+        CONDICION CORCHI CondicionA CORCHD CONDICIONN
+;
+
+CONDICIONN ::=
+        VERDADERO Asignacion INICIO INSTRUCCIONES FIN |
+        FALSO Asignacion INICIO INSTRUCCIONES FIN |
+        VERDADERO Asignacion INICIO INSTRUCCIONES FIN FALSO Asignacion INICIO INSTRUCCIONES FIN |
+        FALSO Asignacion INICIO INSTRUCCIONES FIN VERDADERO Asignacion INICIO INSTRUCCIONES FIN
+;
+
+OPCIONES ::=
+	OPCIONN | OPCIONN OPCIONES
+;
+
+OPCIONN ::=
+	OPCION Numero Asignacion INSTRUCCIONES ROMPER FINLI |
+        OPCION Numero Asignacion ROMPER FINLI |
+        OPCION UNO Asignacion INSTRUCCIONES ROMPER FINLI |
+        OPCION UNO Asignacion ROMPER FINLI |
+        OPCION CERO Asignacion INSTRUCCIONES ROMPER FINLI |
+        OPCION CERO Asignacion ROMPER FINLI |
+        OPCION NumeroEnt Asignacion INSTRUCCIONES ROMPER FINLI |
+        OPCION NumeroEnt Asignacion ROMPER FINLI 
+;
+
+NINGUNON ::=
+        NINGUNO Asignacion INSTRUCCIONES ROMPER FINLI |
+        NINGUNO Asignacion ROMPER FINLI
+;
+
+AVANZARE ::=
+        AVANZAR CORCHI Numero CORCHD FINLI |
+        AVANZAR CORCHI Identificador CORCHD FINLI
+;
+
+CICLOS ::=
+    CICLO CORCHI CondicionA CORCHD INICIO INSTRUCCIONES FIN |
+    CICLO CORCHI CondicionA CORCHD INICIO FIN
+;
+
+BANDERAE ::=
+    BANDERA INICIO INSTRUCCIONES FIN CICLOS
+;
+
+REPETIRE ::=
+    REPETIR CORCHI CondicionA CORCHD INICIO INSTRUCCIONES FIN
+;
+
+FUNCIONE ::=
+    FUNCION Identificador CORCHI CORCHD INICIO INSTRUCCIONES FIN |
+    FUNCION Identificador CORCHI CORCHD INICIO FIN |
+    FUNCION Identificador CORCHI TIPOS Identificador CORCHD INICIO INSTRUCCIONES FIN |
+    FUNCION Identificador CORCHI TIPOS Identificador CORCHD INICIO FIN
+;
+
+CondicionA ::=
+        Identificador RELACIONALES Numero |
+        Identificador RELACIONALES NumeroEnt |
+        Identificador RELACIONALES UNO |
+        Identificador RELACIONALES CERO |
+        Numero RELACIONALES Identificador |
+        NumeroEnt RELACIONALES Identificador |
+        UNO RELACIONALES Identificador |
+        CERO RELACIONALES Identificador |
+        Identificador RELACIONALES Identificador
+;
+
+RELACIONALES ::=
+        IGUALQUE | DIFERENTEDE | MAYORIGUAL | MENORIGUAL | MENOR | MAYOR
+;
+
+TIPOS ::=
+    DIGITAL | ENTERO | ANALOGO
+;
+
+ENCENDER ::=
+    LUZ CORCHI direccion COMILLA posicion CORCHD Asignacion UNO FINLI
+;
+
+APAGAR ::=
+    LUZ CORCHI direccion COMILLA posicion CORCHD Asignacion CERO FINLI
+;
+
+OBTENERLUZ ::=
+    ESTADO PARENTESISI LUZ CORCHI direccion COMILLA posicion CORCHD PARENTESISD |
+    ESTADO PARENTESISI LUZ CORCHI posicion COMILLA direccion CORCHD PARENTESISD :s {:v.genErrores.add((sright+1) + "Debes poner primero la direccion y luego la posicion");:}
+;
+
+USARSENSOR ::=
+    SENSOR CORCHI posicion CORCHD
+;
+
+DETENERMOVRUEDAS ::=
+    PARAR CORCHI Numero CORCHD FINLI |
+    PARAR CORCHI NumeroEnt CORCHD FINLI |
+    PARAR CORCHI CERO CORCHD FINLI |
+    PARAR CORCHI UNO CORCHD FINLI |
+    PARAR CORCHI UNO CORCHD
+;
+
+GIRARCARRO ::=
+    GIRAR RUEDAS CORCHI direccion COMILLA Numero CORCHD |
+    GIRAR RUEDAS CORCHI direccion COMILLA NumeroEnt CORCHD |
+    GIRAR RUEDAS CORCHI direccion COMILLA CERO CORCHD |
+    GIRAR RUEDAS CORCHI direccion COMILLA UNO CORCHD
+;
+
+MANEJOGANCHO ::=
+    GANCHO BAJAR CORCHI NumeroEnt CORCHD FINLI |
+    GANCHO SUBIR CORCHI NumeroEnt CORCHD FINLI |
+    GANCHO ABRIR CORCHI NumeroEnt CORCHD FINLI |
+    GANCHO CERRAR FINLI :s {:v.genErrores.add((sright+1) + "f gjn");:}
+;
+
+MOVCARRO ::=
+    AVANZAR  CORCHI Numero CORCHD |
+    RETROCEDER CORCHI Numero CORCHD |
+    AVANZAR  CORCHI NumeroEnt CORCHD |
+    RETROCEDER CORCHI NumeroEnt CORCHD |
+    AVANZAR  CORCHI UNO CORCHD |
+    RETROCEDER CORCHI UNO CORCHD |
+    AVANZAR  CORCHI CERO CORCHD |
+    RETROCEDER CORCHI CERO CORCHD
+;
+
+CONTROLCABINA ::=
+    GIRAR CABINA CORCHI CARDINAL CORCHD FINLI
+;
+
+CARDINAL ::=
+    NORTE | NORESTE | ESTE | SURESTE | SUR | SUROESTE | OESTE | NOROESTE
+;
+
+FUNCIONBOCINA ::=
+    BOCINA CORCHI UNO CORCHD FINLI | BOCINA CORCHI CERO CORCHD FINLI
+;
+
+direccion ::=
+    DERECHA | IZQUIERDA
+;
+
+posicion ::=
+    DELANTERA | TRASERA
+;
+
+OperadoresA ::=
+    Suma | Resta | Division | Multiplicacion
+;
+
+OperadoresLo ::=
+    AND | OR | NOT
+;
+
+Operaciones ::=
+    Numero OperadoresA Numero |
+    NumeroEnt OperadoresA NumeroEnt |
+    Numero OperadoresA NumeroEnt |
+    NumeroEnt OperadoresA Numero |
+    Numero OperadoresLo Numero |
+    NumeroEnt OperadoresLo NumeroEnt |
+    Numero OperadoresLo NumeroEnt |
+    NumeroEnt OperadoresLo Numero
+    
+;
