@@ -117,8 +117,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         btnAbrir = new javax.swing.JButton();
-        btnReservadas = new javax.swing.JButton();
-        btnIdent = new javax.swing.JButton();
         btnTokens = new javax.swing.JButton();
         btnCompilar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -172,20 +170,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnReservadas.setText("Reservadas");
-        btnReservadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReservadasActionPerformed(evt);
-            }
-        });
-
-        btnIdent.setText("Ident");
-        btnIdent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIdentActionPerformed(evt);
-            }
-        });
-
         btnTokens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/004-chip.png"))); // NOI18N
         btnTokens.setBorder(null);
         btnTokens.setBorderPainted(false);
@@ -219,34 +203,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnNuevo)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
-                .addGap(16, 16, 16)
-                .addComponent(btnAbrir)
-                .addGap(20, 20, 20)
-                .addComponent(btnReservadas)
                 .addGap(18, 18, 18)
-                .addComponent(btnIdent)
+                .addComponent(btnAbrir)
                 .addGap(18, 18, 18)
                 .addComponent(btnTokens)
                 .addGap(18, 18, 18)
                 .addComponent(btnCompilar)
-                .addContainerGap(827, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnNuevo)
-                    .addComponent(btnReservadas)
-                    .addComponent(btnIdent)
-                    .addComponent(btnTokens)
-                    .addComponent(btnCompilar))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAbrir)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnGuardar)
+                        .addComponent(btnNuevo)
+                        .addComponent(btnTokens)
+                        .addComponent(btnCompilar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAbrir)
-                .addGap(14, 14, 14))
         );
 
         jPanel2.setBackground(new java.awt.Color(17, 63, 100));
@@ -398,10 +374,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
             
     }//GEN-LAST:event_btnCompilarActionPerformed
-
-    private void btnIdentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIdentActionPerformed
 
     private void btnTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTokensActionPerformed
         // TODO add your handling code here:
@@ -896,14 +868,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTokensActionPerformed
-
-    private void btnReservadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservadasActionPerformed
-        jtpCode.setText("PRINCIPAL\n" +
-        "INICIO \n" +
-        "       DIGITAL $FSA : 21 #\n" +
-        "FIN");
-        
-    }//GEN-LAST:event_btnReservadasActionPerformed
     //Mestodo para encontrar las ultimas cadenas
     private int findLastNonWordChar(String text, int index) {
         while (--index >= 0) {
@@ -1048,9 +1012,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnCompilar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnIdent;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnReservadas;
     private javax.swing.JButton btnTokens;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
