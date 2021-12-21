@@ -117,8 +117,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         btnAbrir = new javax.swing.JButton();
-        btnReservadas = new javax.swing.JButton();
-        btnIdent = new javax.swing.JButton();
         btnTokens = new javax.swing.JButton();
         btnCompilar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -133,51 +131,63 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1366, 768));
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(17, 63, 100));
 
-        btnGuardar.setText("Guardar");
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/003-diskette.png"))); // NOI18N
+        btnGuardar.setBorder(null);
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/003-diskette-green.png"))); // NOI18N
+        btnGuardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/003-diskette-blue.png"))); // NOI18N
+        btnGuardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/003-diskette-blue.png"))); // NOI18N
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
 
-        btnNuevo.setText("Nuevo");
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/002-new-document.png"))); // NOI18N
+        btnNuevo.setBorder(null);
+        btnNuevo.setBorderPainted(false);
+        btnNuevo.setContentAreaFilled(false);
+        btnNuevo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/002-new-document-green.png"))); // NOI18N
+        btnNuevo.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/002-new-document-blue.png"))); // NOI18N
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
             }
         });
 
-        btnAbrir.setText("Abrir");
+        btnAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/001-open.png"))); // NOI18N
+        btnAbrir.setBorder(null);
+        btnAbrir.setBorderPainted(false);
+        btnAbrir.setContentAreaFilled(false);
+        btnAbrir.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/001-open-green.png"))); // NOI18N
+        btnAbrir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/001-open-blue.png"))); // NOI18N
         btnAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbrirActionPerformed(evt);
             }
         });
 
-        btnReservadas.setText("Reservadas");
-        btnReservadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReservadasActionPerformed(evt);
-            }
-        });
-
-        btnIdent.setText("Ident");
-        btnIdent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIdentActionPerformed(evt);
-            }
-        });
-
-        btnTokens.setText("Tokens");
+        btnTokens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/004-chip.png"))); // NOI18N
+        btnTokens.setBorder(null);
+        btnTokens.setBorderPainted(false);
+        btnTokens.setContentAreaFilled(false);
+        btnTokens.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/004-chip-green.png"))); // NOI18N
+        btnTokens.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/004-chip-blue.png"))); // NOI18N
         btnTokens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTokensActionPerformed(evt);
             }
         });
 
-        btnCompilar.setText("Compilar");
+        btnCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/001-play.png"))); // NOI18N
+        btnCompilar.setBorder(null);
+        btnCompilar.setBorderPainted(false);
+        btnCompilar.setContentAreaFilled(false);
+        btnCompilar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/001-play-green.png"))); // NOI18N
+        btnCompilar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/codigo/001-play-blue.png"))); // NOI18N
         btnCompilar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCompilarActionPerformed(evt);
@@ -196,31 +206,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnAbrir)
                 .addGap(18, 18, 18)
-                .addComponent(btnReservadas)
-                .addGap(18, 18, 18)
-                .addComponent(btnIdent)
-                .addGap(18, 18, 18)
                 .addComponent(btnTokens)
                 .addGap(18, 18, 18)
                 .addComponent(btnCompilar)
-                .addContainerGap(619, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnNuevo)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAbrir)
-                    .addComponent(btnReservadas)
-                    .addComponent(btnIdent)
-                    .addComponent(btnTokens)
-                    .addComponent(btnCompilar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnGuardar)
+                        .addComponent(btnNuevo)
+                        .addComponent(btnTokens)
+                        .addComponent(btnCompilar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(17, 63, 100));
 
         tblTokens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,7 +257,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jtpCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -269,12 +274,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1090, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +287,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -335,9 +340,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jtpCodeKeyReleased
-
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
         // TODO add your handling code here:
+        limpiarTabla(tblTokens);
+        jPanel2.setVisible(false);
         jtaCompile.setText("");
         String ST = jtpCode.getText();
         Sintax s = new Sintax(new codigo.LexerCup(new StringReader(ST)));
@@ -367,12 +373,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
             
     }//GEN-LAST:event_btnCompilarActionPerformed
 
-    private void btnIdentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIdentActionPerformed
-
     private void btnTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTokensActionPerformed
         // TODO add your handling code here:
+        jPanel2.setVisible(true);
         File archivo = new File("archivo.txt");
         PrintWriter escribir;
         LlenarTabla();
@@ -864,14 +867,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTokensActionPerformed
-
-    private void btnReservadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservadasActionPerformed
-        jtpCode.setText("PRINCIPAL\n" +
-        "INICIO \n" +
-        "       DIGITAL $FSA : 21 #\n" +
-        "FIN");
-        
-    }//GEN-LAST:event_btnReservadasActionPerformed
     //Mestodo para encontrar las ultimas cadenas
     private int findLastNonWordChar(String text, int index) {
         while (--index >= 0) {
@@ -1016,9 +1011,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnCompilar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnIdent;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnReservadas;
     private javax.swing.JButton btnTokens;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
