@@ -55,9 +55,7 @@ INSTRUCCION ::=
 ;
 
 DECLARACION ::=
-    ENTERO Identificador FINLI |
-    DIGITAL Identificador FINLI |
-    ANALOGO Identificador FINLI
+    ENTERO Identificador FINLI 
 ;
 
 DECLARACIONCONVALOR ::=
