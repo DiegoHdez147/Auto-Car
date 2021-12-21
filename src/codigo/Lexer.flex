@@ -85,8 +85,8 @@ NINGUNO {lexeme=yytext(); return NINGUNO;}
 "*" {return Multiplicacion;}
 "/" {return Division;}
 {I}{L}({L}|{D})* {lexeme=yytext(); return Identificador;}
-("(-"{D}+")")|{D}+|({D})*"."({D})*+ {lexeme=yytext(); return Numero;}
-("(-"{D}+")")|{D}+|({D})*+ {lexeme=yytext(); return NumeroEnt;}
+({D})+"."({D})+ {lexeme=yytext(); return Numero;}
+("(-"{D}+")")|{D}+|({D})+ {lexeme=yytext(); return NumeroEnt;}
 {IM}{L}({L}|{D})* {lexeme=yytext(); return ERROR1;}
 ({D})*{PM}({D})*+ {lexeme=yytext(); return ERROR2;}
 ({L}|{D})* {lexeme=yytext(); return ERRORP;}

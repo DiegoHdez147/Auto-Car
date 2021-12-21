@@ -32,7 +32,7 @@ NINGUNON, CONDICIONES, CONDICIONN, CondicionA ,RELACIONALES, AVANZARE,
 DECLARARTIPO,BANDERAE, CICLOS, REPETIRE, TIPOS, FUNCIONE, 
 direccion, posicion, ENCENDER,APAGAR, OBTENERLUZ,USARSENSOR,DETENERMOVRUEDAS,
 GIRARCARRO,MANEJOGANCHO,MOVCARRO,CONTROLCABINA,FUNCIONBOCINA, CARDINAL, Operaciones,
-OperadoresLo,OperadoresA;
+OperadoresLo,OperadoresA,DECLARACIONCONVALOR,DECLARACION, Valor;
 
 start with START;
 
@@ -48,30 +48,55 @@ INSTRUCCIONES ::=
 ;
 
 INSTRUCCION ::=
-    EVALUARE | AVANZARE | CONDICIONES | DECLARARTIPO | BANDERAE | CICLOS |
+    EVALUARE | AVANZARE | CONDICIONES  | BANDERAE | CICLOS |
     REPETIRE | FUNCIONE | ENCENDER | APAGAR | OBTENERLUZ | USARSENSOR |
     DETENERMOVRUEDAS | GIRARCARRO | MANEJOGANCHO | 
-    MOVCARRO | CONTROLCABINA | FUNCIONBOCINA | Operaciones
+    MOVCARRO | CONTROLCABINA | FUNCIONBOCINA | DECLARACIONCONVALOR | DECLARACION
 ;
 
-DECLARARTIPO ::=
+DECLARACION ::=
     ENTERO Identificador FINLI |
-    ANALOGO Identificador FINLI | 
     DIGITAL Identificador FINLI |
+    ANALOGO Identificador FINLI
+;
 
+DECLARACIONCONVALOR ::=
     ENTERO Identificador Asignacion NumeroEnt FINLI |
     ANALOGO Identificador Asignacion Numero FINLI |
-
+    ENTERO Identificador Asignacion Numero FINLI :s {:v.genErrores.add((sright+1) + " Deberias intentar con un numero sin decimales");:}|
+    ANALOGO Identificador Asignacion NumeroEnt FINLI :s {:v.genErrores.add((sright+1) + " Deberias intentar con un numero con decimales");:}|
     ENTERO Identificador Asignacion UNO FINLI |
     ANALOGO Identificador Asignacion CERO FINLI |
     ENTERO Identificador Asignacion CERO FINLI |
     ANALOGO Identificador Asignacion UNO FINLI |
-
     DIGITAL Identificador Asignacion UNO FINLI |
     DIGITAL Identificador Asignacion CERO FINLI |
     
+    ENTERO Identificador Asignacion NumeroEnt  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:} |
+        
+    ANALOGO Identificador Asignacion Numero :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}  |
+    ENTERO Identificador Asignacion UNO  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}|
+    ENTERO Identificador Asignacion CERO  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}|
+    ANALOGO Identificador Asignacion UNO  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}|
+    ANALOGO Identificador Asignacion CERO  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}|
+    DIGITAL Identificador Asignacion CERO  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}|
+    DIGITAL Identificador Asignacion UNO  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}|   
+    ENTERO Identificador Asignacion  FINLI :s {:v.genErrores.add((sright+1) + " No es asignado ningun valor al identificador");:}|
+    ANALOGO Identificador Asignacion FINLI :s {:v.genErrores.add((sright+1) + " No es asignado ningun valor al identificador");:} |
+    DIGITAL Identificador Asignacion FINLI :s {:v.genErrores.add((sright+1) + " No es asignado ningun valor al identificador");:}|
+    
+
+    
+    DIGITAL Identificador Asignacion Numero  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:} |
     DIGITAL Identificador Asignacion Numero FINLI :s {:v.genErrores.add((sright+1) + " Estas intentando agregar un valor diferente a 1 y 0");:} |
-    DIGITAL Identificador Asignacion NumeroEnt FINLI :s {:v.genErrores.add((sright+1) + " Estas intentando agregar un valor diferente a 1 y 0");:}
+    
+    DIGITAL Identificador Asignacion NumeroEnt  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:} |
+    DIGITAL Identificador Asignacion NumeroEnt FINLI :s {:v.genErrores.add((sright+1) + " Estas intentando agregar un valor diferente a 1 y 0");:}|
+    DIGITAL Identificador Asignacion  :s {:v.genErrores.add((sright+1) + " No es asignado");:}
+;
+
+NumerosGeneral ::=
+    NumeroEnt | Numero
 ;
 
 EVALUARE ::=
@@ -133,6 +158,10 @@ FUNCIONE ::=
     FUNCION Identificador CORCHI CORCHD INICIO FIN |
     FUNCION Identificador CORCHI TIPOS Identificador CORCHD INICIO INSTRUCCIONES FIN |
     FUNCION Identificador CORCHI TIPOS Identificador CORCHD INICIO FIN
+;
+
+Valor ::=
+    Identificador | Numero | NumeroEnt | Operaciones | UNO | CERO
 ;
 
 CondicionA ::=

@@ -94,8 +94,8 @@ NINGUNO {return new Symbol(sym.NINGUNO, yychar, yyline , yytext());}
 "1" {return new Symbol(sym.UNO, yychar, yyline , yytext());}
 "0" {return new Symbol(sym.CERO, yychar, yyline , yytext());}
 {I}{L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline , yytext());}
-("(-"{D}+")")|{D}+|({D})*"."({D})*+ {return new Symbol(sym.Numero, yychar, yyline , yytext());}
-("(-"{D}+")")|{D}+|({D})*+ {return new Symbol(sym.NumeroEnt, yychar, yyline , yytext());}
+("-"(({D})+)"."(({D})+))|((({D})+)"."(({D})+)) {return new Symbol(sym.Numero, yychar, yyline , yytext());}
+("(-"{D}+")")|({D}+) {return new Symbol(sym.NumeroEnt, yychar, yyline , yytext());}
 {IM}{L}({L}|{D})* {return new Symbol(sym.ERROR1, yychar, yyline , yytext());}
 ({D})*{PM}({D})*+ {return new Symbol(sym.ERROR2, yychar, yyline , yytext());}
 ({L}|{D})* {return new Symbol(sym.ERRORP, yychar, yyline , yytext());}
