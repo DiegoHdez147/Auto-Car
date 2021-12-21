@@ -274,15 +274,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addGap(30, 30, 30))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1090, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,9 +340,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jtpCodeKeyReleased
-
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
         // TODO add your handling code here:
+        limpiarTabla(tblTokens);
+        jPanel2.setVisible(false);
         jtaCompile.setText("");
         String ST = jtpCode.getText();
         Sintax s = new Sintax(new codigo.LexerCup(new StringReader(ST)));
@@ -377,6 +375,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTokensActionPerformed
         // TODO add your handling code here:
+        jPanel2.setVisible(true);
         File archivo = new File("archivo.txt");
         PrintWriter escribir;
         LlenarTabla();
