@@ -32,12 +32,12 @@ NINGUNON, CONDICIONES, CONDICIONN, CondicionA ,RELACIONALES, AVANZARE,
 DECLARARTIPO,BANDERAE, CICLOS, REPETIRE, TIPOS, FUNCIONE, 
 direccion, posicion, ENCENDER,APAGAR, OBTENERLUZ,USARSENSOR,DETENERMOVRUEDAS,
 GIRARCARRO,MANEJOGANCHO,MOVCARRO,CONTROLCABINA,FUNCIONBOCINA, CARDINAL, Operaciones,
-OperadoresLo,OperadoresA,DECLARACIONCONVALOR,DECLARACION, Valor;
+OperadoresLo,OperadoresA,DECLARACIONCONVALOR,DECLARACION,Valor,EVAERROR,IniFinStar, NumerosGeneral;
 
 start with START;
 
 START ::= 
-    PRINCIPAL INICIO INSTRUCCIONES FIN | 
+    PRINCIPAL INICIO INSTRUCCIONES FIN| 
     PRINCIPAL INICIO FIN |
     PRINCIPAL INICIO :s {:v.genErrores.add((sright+1) + " No agregaste el FIN");:}|
     PRINCIPAL INICIO INSTRUCCIONES :s {:v.genErrores.add((sright+1) + " No agregaste el FIN");:}
@@ -55,7 +55,9 @@ INSTRUCCION ::=
 ;
 
 DECLARACION ::=
-    ENTERO Identificador FINLI 
+    ENTERO Identificador FINLI |
+    DIGITAL Identificador FINLI |
+    ANALOGO Identificador FINLI
 ;
 
 DECLARACIONCONVALOR ::=
@@ -69,9 +71,7 @@ DECLARACIONCONVALOR ::=
     ANALOGO Identificador Asignacion UNO FINLI |
     DIGITAL Identificador Asignacion UNO FINLI |
     DIGITAL Identificador Asignacion CERO FINLI |
-    
-    ENTERO Identificador Asignacion NumeroEnt  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:} |
-        
+    ENTERO Identificador Asignacion NumeroEnt  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:} |        
     ANALOGO Identificador Asignacion Numero :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}  |
     ENTERO Identificador Asignacion UNO  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}|
     ENTERO Identificador Asignacion CERO  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:}|
@@ -82,15 +82,21 @@ DECLARACIONCONVALOR ::=
     ENTERO Identificador Asignacion  FINLI :s {:v.genErrores.add((sright+1) + " No es asignado ningun valor al identificador");:}|
     ANALOGO Identificador Asignacion FINLI :s {:v.genErrores.add((sright+1) + " No es asignado ningun valor al identificador");:} |
     DIGITAL Identificador Asignacion FINLI :s {:v.genErrores.add((sright+1) + " No es asignado ningun valor al identificador");:}|
-    
-
-    
     DIGITAL Identificador Asignacion Numero  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:} |
     DIGITAL Identificador Asignacion Numero FINLI :s {:v.genErrores.add((sright+1) + " Estas intentando agregar un valor diferente a 1 y 0");:} |
-    
     DIGITAL Identificador Asignacion NumeroEnt  :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador #");:} |
     DIGITAL Identificador Asignacion NumeroEnt FINLI :s {:v.genErrores.add((sright+1) + " Estas intentando agregar un valor diferente a 1 y 0");:}|
-    DIGITAL Identificador Asignacion  :s {:v.genErrores.add((sright+1) + " No es asignado");:}
+    DIGITAL Identificador Asignacion  :s {:v.genErrores.add((sright+1) + " No se asigno el valor al identificador y ni el finalizador #");:} |
+    ENTERO Identificador Asignacion  :s {:v.genErrores.add((sright+1) + " No se asigno el valor al identificador y ni el finalizador #");:} |
+    ANALOGO Identificador Asignacion  :s {:v.genErrores.add((sright+1) + " No se asigno el valor al identificador y ni el finalizador #");:}
+    DIGITAL Identificador :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador o la asignacion(:)");:} |
+    ENTERO Identificador :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador o la asignacion(:)");:} |
+    ANALOGO Identificador :s {:v.genErrores.add((sright+1) + " No se agrego el finalizador o la asignacion(:)");:} |
+    ANALOGO  :s {:v.genErrores.add((sright+1) + " No se agrego el identificador ");:} |
+    ENTERO  :s {:v.genErrores.add((sright+1) + " No se agrego el identificador ");:} |
+    DIGITAL  :s {:v.genErrores.add((sright+1) + " No se agrego el identificador ");:}
+
+
 ;
 
 NumerosGeneral ::=
@@ -100,19 +106,26 @@ NumerosGeneral ::=
 EVALUARE ::=
 	EVALUAR CORCHI Identificador CORCHD INICIO OPCIONES FIN|
 	EVALUAR CORCHI Identificador CORCHD INICIO OPCIONES NINGUNON FIN
+
 ;
 
 CONDICIONES ::=
-        CONDICION CORCHI CondicionA CORCHD CONDICIONN
+        CONDICION CORCHI CondicionA CORCHD CONDICIONN |
+        CONDICION CORCHI CondicionA  CONDICIONN :s {:v.genErrores.add((sright+1) + " No se ingreso el corchete que cierra (]) correspondiente");:}|
+        CONDICION CORCHI CondicionA CORCHD  :s {:v.genErrores.add((sright+1) + " No se ingreso los casos de la condicion");:}
 ;
 
 CONDICIONN ::=
         VERDADERO Asignacion INICIO INSTRUCCIONES FIN |
         FALSO Asignacion INICIO INSTRUCCIONES FIN |
         VERDADERO Asignacion INICIO INSTRUCCIONES FIN FALSO Asignacion INICIO INSTRUCCIONES FIN |
-        FALSO Asignacion INICIO INSTRUCCIONES FIN VERDADERO Asignacion INICIO INSTRUCCIONES FIN
+        FALSO Asignacion INICIO INSTRUCCIONES FIN VERDADERO Asignacion INICIO INSTRUCCIONES FIN |
+        FALSO Asignacion INICIO INSTRUCCIONES FIN VERDADERO Asignacion INICIO FIN |
+        FALSO Asignacion INICIO FIN VERDADERO Asignacion INICIO INSTRUCCIONES FIN |
+        FALSO Asignacion INICIO FIN VERDADERO Asignacion INICIO FIN |
+        VERDADERO Asignacion INICIO FIN FALSO Asignacion INICIO INSTRUCCIONES FIN :s {:v.genErrores.add((sright+1) + "Te faltaron los : despues de Verdadero");:}
+        FALSO Asignacion INICIO FIN VERDADERO INICIO INSTRUCCIONES FIN :s {:v.genErrores.add((sright+1) + "Te faltaron los : despues de Verdadero");:}
 ;
-
 OPCIONES ::=
 	OPCIONN | OPCIONN OPCIONES
 ;
@@ -120,21 +133,28 @@ OPCIONES ::=
 OPCIONN ::=
 	OPCION Numero Asignacion INSTRUCCIONES ROMPER FINLI |
         OPCION Numero Asignacion ROMPER FINLI |
-        OPCION UNO Asignacion INSTRUCCIONES ROMPER FINLI |
         OPCION UNO Asignacion ROMPER FINLI |
         OPCION CERO Asignacion INSTRUCCIONES ROMPER FINLI |
         OPCION CERO Asignacion ROMPER FINLI |
         OPCION NumeroEnt Asignacion INSTRUCCIONES ROMPER FINLI |
-        OPCION NumeroEnt Asignacion ROMPER FINLI 
-;
+        OPCION NumeroEnt Asignacion ROMPER FINLI |
+        OPCION NumeroEnt Asignacion FINLI :s {:v.genErrores.add((sright+1) + " Falto agregar ROMPER antes del fin de linea");:}
+; 
 
 NINGUNON ::=
         NINGUNO Asignacion INSTRUCCIONES ROMPER FINLI |
         NINGUNO Asignacion ROMPER FINLI
 ;
 
+Valor ::=
+    Identificador | Numero | NumeroEnt | Operaciones | UNO | CERO
+;
+
 AVANZARE ::=
         AVANZAR CORCHI Numero CORCHD FINLI |
+        AVANZAR CORCHI NumeroEnt CORCHD FINLI |
+        AVANZAR CORCHI UNO CORCHD FINLI |
+        AVANZAR CORCHI CERO CORCHD FINLI |
         AVANZAR CORCHI Identificador CORCHD FINLI
 ;
 
@@ -158,10 +178,6 @@ FUNCIONE ::=
     FUNCION Identificador CORCHI TIPOS Identificador CORCHD INICIO FIN
 ;
 
-Valor ::=
-    Identificador | Numero | NumeroEnt | Operaciones | UNO | CERO
-;
-
 CondicionA ::=
         Identificador RELACIONALES Numero |
         Identificador RELACIONALES NumeroEnt |
@@ -171,7 +187,9 @@ CondicionA ::=
         NumeroEnt RELACIONALES Identificador |
         UNO RELACIONALES Identificador |
         CERO RELACIONALES Identificador |
-        Identificador RELACIONALES Identificador
+        Identificador RELACIONALES Identificador|
+         Numero RELACIONALES Numero|
+        NumeroEnt RELACIONALES NumeroEnt
 ;
 
 RELACIONALES ::=
@@ -222,18 +240,19 @@ MANEJOGANCHO ::=
 ;
 
 MOVCARRO ::=
-    AVANZAR  CORCHI Numero CORCHD |
+    AVANZAR CORCHI Numero CORCHD |
     RETROCEDER CORCHI Numero CORCHD |
-    AVANZAR  CORCHI NumeroEnt CORCHD |
+    AVANZAR CORCHI NumeroEnt CORCHD |
     RETROCEDER CORCHI NumeroEnt CORCHD |
-    AVANZAR  CORCHI UNO CORCHD |
+    AVANZAR CORCHI UNO CORCHD |
     RETROCEDER CORCHI UNO CORCHD |
-    AVANZAR  CORCHI CERO CORCHD |
-    RETROCEDER CORCHI CERO CORCHD
+    AVANZAR CORCHI CERO CORCHD |
+    RETROCEDER CORCHI CERO CORCHD 
 ;
 
 CONTROLCABINA ::=
     GIRAR CABINA CORCHI CARDINAL CORCHD FINLI
+    GIRAR CABINA CORCHI CORCHD FINLI :s {:v.genErrores.add((sright+1) + "No has agregado una direccion de giro");:}
 ;
 
 CARDINAL ::=
@@ -268,6 +287,10 @@ Operaciones ::=
     Numero OperadoresLo Numero |
     NumeroEnt OperadoresLo NumeroEnt |
     Numero OperadoresLo NumeroEnt |
-    NumeroEnt OperadoresLo Numero
-    
+    NumeroEnt OperadoresLo Numero |
+
+    CERO OperadoresLo CERO |
+    UNO OperadoresLo CERO |
+    UNO OperadoresLo UNO |
+    CERO OperadoresLo CERO
 ;

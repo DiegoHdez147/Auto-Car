@@ -12,7 +12,7 @@ D=[0-9]+
 I=[$]
 IM=[$]+
 PM = [.]+
-espacio=[ ,\t,\r,\n]+
+espacio=[ \t\r\n]+
 %{
     private Symbol symbol(int type, Object value){
         return new Symbol(type, yyline, yycolumn, value);
